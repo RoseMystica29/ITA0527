@@ -23,4 +23,6 @@ def analyze_histogram(image_path):
     plt.legend()
     plt.show()
 
-analyze_histogram("sample.jpg")
+analyze_histogram("C:/Users/Johnhenry/OneDrive/Desktop/sample")
+
+
