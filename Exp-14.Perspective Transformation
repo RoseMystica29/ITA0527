@@ -1,0 +1,23 @@
+import cv2
+import numpy as np
+img = cv2.imread("C:/Users/Johnhenry/OneDrive/Desktop/sample")
+
+if img is None:
+    print("Image not found. Check file name and extension.")
+else:
+    rows, cols = img.shape[:2]
+
+    pts1 = np.float32([[50,50], [300,50], [50,300], [300,300]])
+    pts2 = np.float32([[0,0], [cols,0], [0,rows], [cols,rows]])
+
+    M = cv2.getPerspectiveTransform(pts1, pts2)
+    perspective = cv2.warpPerspective(img, M, (cols, rows))
+
+    small_input = cv2.resize(img, (300, 200))
+    small_output = cv2.resize(perspective, (300, 200))
+
+    cv2.imshow("Original Image (Small)", small_input)
+    cv2.imshow("Perspective Transformed (Small)", small_output)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
