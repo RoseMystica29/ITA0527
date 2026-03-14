@@ -1,0 +1,17 @@
+import cv2
+import numpy as np
+
+img = cv2.imread("C:/Users/Johnhenry/OneDrive/Desktop/sample.jpg")
+
+lower = np.array([120,120,120])
+upper = np.array([255,255,255])
+
+mask = cv2.inRange(img, lower, upper)
+
+foreground = cv2.bitwise_and(img,img,mask=mask)
+
+cv2.imshow("Input Image", cv2.resize(img,(600,400)))
+cv2.imshow("Foreground Extracted", cv2.resize(foreground,(600,400)))
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
