@@ -1,0 +1,25 @@
+import cv2
+import pytesseract
+
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+cap = cv2.VideoCapture("C:/Users/Johnhenry/Downloads/WhatsApp Video 2026-03-14 at 10.57.53 AM.mp4")
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    text = pytesseract.image_to_string(gray)
+
+    print("Detected Text:", text)
+
+    cv2.imshow("Video Frame", cv2.resize(frame,(600,400)))
+
+    if cv2.waitKey(30) == 27:
+        break
+
+cap.release()
+cv2.destroyAllWindows()
