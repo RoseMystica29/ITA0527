@@ -1,0 +1,36 @@
+import cv2
+
+cap = cv2.VideoCapture("C:/Users/Johnhenry/Downloads/1196530-hd_1920_1080_30fps.mp4")
+
+frames = []
+
+while True:
+    ret, frame = cap.read()
+    if not ret:
+        break
+    frames.append(frame)
+
+cap.release()
+
+forward_index = 0
+reverse_index = len(frames) - 1
+
+while forward_index < len(frames):
+
+    forward = frames[forward_index]
+    reverse = frames[reverse_index]
+
+    forward = cv2.resize(forward,(600,400))
+    reverse = cv2.resize(reverse,(600,400))
+
+    combined = cv2.hconcat([forward, reverse])
+
+    cv2.imshow("Forward Video | Reverse Slow Motion Video", combined)
+
+    forward_index += 1
+    reverse_index -= 1
+
+    if cv2.waitKey(120) == 27:   # higher delay = slower reverse
+        break
+
+cv2.destroyAllWindows()
