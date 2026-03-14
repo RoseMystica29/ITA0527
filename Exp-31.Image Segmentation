@@ -1,0 +1,21 @@
+import cv2
+
+# Read image
+img = cv2.imread("C:/Users/Johnhenry/OneDrive/Desktop/sample.jpg")
+
+# Convert to grayscale
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+# Apply threshold segmentation
+ret, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+
+# Resize images
+input_img = cv2.resize(img,(600,400))
+segmented = cv2.resize(thresh,(600,400))
+
+# Show images
+cv2.imshow("Input Image", input_img)
+cv2.imshow("Segmented Output", segmented)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
